@@ -16,9 +16,13 @@ class Linha:
     def init(user):
         user.id=0
         user.firstColumn=''
+        user.secondColumn=''
 
     def setId(user, id):
         user.id=id
 
     def setFirstColumn(user, firstColumn):
         user.firstColumn=firstColumn
+
+    def setSecondColumn(user, secondColumn):
+        user.secondColumn=secondColumn
