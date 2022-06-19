@@ -17,10 +17,13 @@ def db_run(sql):
     cursor=connect.cursor()
     try:
         cursor.execute(sql)
+        connect.commit()
         return cursor.fetchall()
     except(Exception, psycopg2.DatabaseError) as error:
         connect.rollback()
+        connect.close()
         return 1
+    cursor.close()
 
 #tabelas do banco
 class Linha:
