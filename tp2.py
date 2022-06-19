@@ -16,3 +16,10 @@ def execQuery(connect, sql):
     cur.execute(sql)
     connect.commit()
 
+#abre o arquivo txt
+fileName='entradaLog.txt'
+try:
+    file=open(fileName, "r", encoding="utf-8")
+except:
+    print('Erro na abertura do arquivo')
+    exit(0)
