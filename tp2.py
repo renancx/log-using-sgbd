@@ -1,6 +1,6 @@
+from sqlite3 import connect
 import psycopg2     #biblioteca para fazer a conexao com o banco
 from cmath import log
-import sys
 
 #funcao para criar conexao no banco
 def db_connect():
@@ -10,8 +10,17 @@ def db_connect():
         database='logtp2',
         user='postgres', 
         password='12345')
-
     return connect
+
+def db_run(sql):
+    connect=db_connect()
+    cursor=connect.cursor()
+    try:
+        cursor.execute(sql)
+        return cursor.fetchall()
+    except(Exception, psycopg2.DatabaseError) as error:
+        connect.rollback()
+        return 1
 
 #tabelas do banco
 class Linha:
@@ -39,5 +48,5 @@ def openLog(file):
         print('File error')
         
 def showLog(f):
-    for line in f:
+    for line in f:  #printar linha por linha
         print(line)
