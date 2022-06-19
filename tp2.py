@@ -1,7 +1,9 @@
 import psycopg2     #biblioteca para fazer a conexao com o banco
+from cmath import log
+import sys
 
 #funcao para criar conexao no banco
-def conecta_db():
+def db_connect():
     connect = psycopg2.connect(
 
         host='localhost', 
@@ -26,3 +28,11 @@ class Linha:
 
     def setSecondColumn(user, secondColumn):
         user.secondColumn=secondColumn
+
+#log
+def openLog(fileName):
+    try:
+        f = open(fileName, 'r') 
+        return f
+    except:
+        print('File error')
