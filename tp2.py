@@ -32,7 +32,8 @@ class Linha:
 #log
 def openLog(fileName):
     try:
-        f = open(fileName, 'r') 
+        f = open(fileName, 'r') #abre para leitura
+        print('File open')
         return f
     except:
         print('File error')
