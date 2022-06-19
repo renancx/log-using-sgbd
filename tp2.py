@@ -29,11 +29,15 @@ class Linha:
     def setSecondColumn(user, secondColumn):
         user.secondColumn=secondColumn
 
-#log
-def openLog(fileName):
+#log - abertura e leitura
+def openLog(file):
     try:
-        f = open(fileName, 'r') #abre para leitura
+        f = open(file, 'r') #abre para leitura
         print('File open')
         return f
     except:
         print('File error')
+        
+def showLog(f):
+    for line in f:
+        print(line)
