@@ -9,3 +9,10 @@ def db_connect():
         user='postgres', 
         password='12345')
     return connect
+
+#executar query
+def execQuery(connect, sql):
+    cur=connect.cursor()
+    cur.execute(sql)
+    connect.commit()
+
