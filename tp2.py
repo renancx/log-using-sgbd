@@ -46,11 +46,11 @@ connect=db_connect()
 
 bd_vetor=[]
 for line in bd_inicial:
-    splitedLine = line.split('=')
+    splitedLine=line.split('=')
     for i in range(0,len(splitedLine),1):
-        splitedLine[i]=splitedLine[i].strip()
+        splitedLine[i]=splitedLine[i].strip() #tira os espacos do comeco e do final
         if ',' in splitedLine[i]:
-            splitedLine[i]=splitedLine[i].split(',')
+            splitedLine[i]=splitedLine[i].split(',') #cada palavra vira uma posicao do vetor
     splitedLine.append('Nao inserido')
 
     bd_vetor.append(splitedLine)
@@ -73,7 +73,7 @@ execQuery(connect,sql)
 
 zerosNum=''
 for i in range(0,len(column),1):
-	zerosNum = zerosNum+',0'
+	zerosNum=zerosNum+',0'
 
 for item in range(0,len(bd_vetor),1):
     if bd_vetor[item][2]=='Nao inserido':
@@ -89,9 +89,9 @@ for item in range(0,len(bd_vetor),1):
 
 #checkpoints
 commitedTransactions={}
-checkpointStart= 0 #linha inicial do checkpoint
+checkpointStart=0 #linha inicial do checkpoint
 
-checkpointFuncional = False #nao teve checkpoint funcional
+checkpointFuncional=False #nao teve checkpoint funcional
 for line in range(len(log)-1,-1,-1):
 	if 'CKPT' in log[line] and 'Start' in log[line]:
 		checkpointStart=line
