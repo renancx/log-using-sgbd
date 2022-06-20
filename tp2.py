@@ -135,7 +135,7 @@ if checkpointFuncional==True:
 		splitedLine=noMoreOrlessLine.split(',')
 		if len(splitedLine)==4:
 			if splitedLine[0] in commitedTransactions.keys():	
-				sql='UPDATE log_test SET '+splitedLine[2]+ '='+splitedLine[3]+' WHERE id ='+splitedLine[1]
+				sql='UPDATE log_table SET '+splitedLine[2]+ '='+splitedLine[3]+' WHERE id ='+splitedLine[1]
 				execQuery(connect, sql)
 else:
 	print('Saida')
@@ -146,5 +146,24 @@ else:
 		splitedLine=noMoreOrlessLine.split(',')
 		if len(splitedLine)==4:
 			if splitedLine[0] in transactionInependent:	
-				sql='UPDATE log_test SET '+splitedLine[2]+ '='+splitedLine[3]+' WHERE id ='+splitedLine[1]
+				sql='UPDATE log_table SET '+splitedLine[2]+ '='+splitedLine[3]+' WHERE id ='+splitedLine[1]
 				execQuery(connect, sql)
+
+#pegar as informacoes e mostrar o estado final do banco
+cursor=connect.cursor()
+query="select * from log_table"
+cursor.execute(query)
+logTestrecords=cursor.fetchall()
+print('Estado final do banco de dados:')
+print('', end = "")
+for i in column:
+	print(i+'' , end = "")
+print('')
+
+for row in logTestrecords:
+	for i in row:
+		print(i,'' , end = "")
+	print('')
+
+connect.close()
+exit(0)
