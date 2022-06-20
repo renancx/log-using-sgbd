@@ -129,7 +129,7 @@ for line in range(0,len(log)-1,1):
 if checkpointFuncional==True:		
 	print('Saida')
 	for i in commitedTransactions.keys():
-		print('Transacao',i,'realizou Redo')
+		print('*A transacao',i,'realizou REDO')
 	for line in range(lastStartLine, len(log)-1, 1):
 		noMoreOrlessLine=log[line][1:-1]
 		splitedLine=noMoreOrlessLine.split(',')
@@ -140,7 +140,7 @@ if checkpointFuncional==True:
 else:
 	print('Saida')
 	for i in transactionInependent:
-		print('A transacao ',i,' realizou REDO')
+		print('*A transacao ',i,' realizou REDO')
 	for line in range(0, len(log)-1, 1):
 		noMoreOrlessLine=log[line][1:-1]
 		splitedLine=noMoreOrlessLine.split(',')
@@ -154,7 +154,7 @@ cursor=connect.cursor()
 query="select * from log_table"
 cursor.execute(query)
 logTestrecords=cursor.fetchall()
-print('Estado final do banco de dados:')
+print('\nEstado final do banco de dados:')
 print('    ', end = "")
 for i in column:
 	print(i+'    ' , end = "")
