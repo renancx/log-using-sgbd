@@ -103,3 +103,24 @@ for line in range(len(log)-1,-1,-1):
 						splitedCommit=log[lineCkpt].split(' ')
 						commitedTransactions[splitedCommit[1][:-1]]='Nao visitado'
 				break
+
+lastStartLine=0
+for line in range(len(log)-1,-1, -1):
+	allStarts=True #encontrou todos os starts
+	if 'unvisited' in commitedTransactions.values():
+		allStarts=False #nao encontrou todos os starts
+	if allStarts==True:
+		break
+	if 'start' in log[line] and 'CKPT' not in log[line]:
+		splitedStart=log[line].split(' ')
+		transaction=splitedStart[1][:-1]
+		if transaction in commitedTransactions.keys():
+			commitedTransactions[transaction]='visited'
+
+	lastStartLine=line
+
+transactionInependent=[] #transacao commitada independente de checkpoint
+for line in range(0,len(log)-1,1):
+	if 'commit' in log[line]:
+		splitedCommit=log[line].split(' ')
+		transactionInependent.append(splitedCommit[1][:-1])
