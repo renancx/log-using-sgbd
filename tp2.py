@@ -11,7 +11,7 @@ def db_connect():
     return connect
 
 #executar query
-def execQuery(connect, sql):
+def execQuery(connect, sql): #operacoes no banco
     cur=connect.cursor()
     cur.execute(sql)
     connect.commit()
