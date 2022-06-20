@@ -65,7 +65,7 @@ sqlColumns=''
 for item in range(0,len(bd_vetor),1):
     if bd_vetor[item][0][0] not in column:
         sqlColumns=sqlColumns+','+bd_vetor[item][0][0]+' INT'
-        column.appen(bd_vetor[item][0][0])
+        column.append(bd_vetor[item][0][0])
 
 #criar tabela
 sql='CREATE TABLE log_table (id INT'+sqlColumns+')'
@@ -155,14 +155,14 @@ query="select * from log_table"
 cursor.execute(query)
 logTestrecords=cursor.fetchall()
 print('Estado final do banco de dados:')
-print('', end = "")
+print('    ', end = "")
 for i in column:
-	print(i+'' , end = "")
+	print(i+'    ' , end = "")
 print('')
 
 for row in logTestrecords:
 	for i in row:
-		print(i,'' , end = "")
+		print(i,'  ' , end = "")
 	print('')
 
 connect.close()
