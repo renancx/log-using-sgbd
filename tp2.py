@@ -66,3 +66,11 @@ for item in range(0,len(bd_vetor),1):
     if bd_vetor[item][0][0] not in column:
         sqlColumns=sqlColumns+','+bd_vetor[item][0][0]+' INT'
         column.appen(bd_vetor[item][0][0])
+
+#criar tabela
+sql='CREATE TABLE log_table (id INT'+sqlColumns+')'
+execQuery(connect,sql)
+
+zerosNum=''
+for i in range(0,len(column),1):
+	zerosNum = zerosNum+',0'
