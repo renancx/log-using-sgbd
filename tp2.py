@@ -124,3 +124,27 @@ for line in range(0,len(log)-1,1):
 	if 'commit' in log[line]:
 		splitedCommit=log[line].split(' ')
 		transactionInependent.append(splitedCommit[1][:-1])
+
+#verificar se fez REDO
+if checkpointFuncional==True:		
+	print('Saida')
+	for i in commitedTransactions.keys():
+		print('Transacao',i,'realizou Redo')
+	for line in range(lastStartLine, len(log)-1, 1):
+		noMoreOrlessLine=log[line][1:-1]
+		splitedLine=noMoreOrlessLine.split(',')
+		if len(splitedLine)==4:
+			if splitedLine[0] in commitedTransactions.keys():	
+				sql='UPDATE log_test SET '+splitedLine[2]+ '='+splitedLine[3]+' WHERE id ='+splitedLine[1]
+				execQuery(connect, sql)
+else:
+	print('Saida')
+	for i in transactionInependent:
+		print('A transacao ',i,' realizou REDO')
+	for line in range(0, len(log)-1, 1):
+		noMoreOrlessLine=log[line][1:-1]
+		splitedLine=noMoreOrlessLine.split(',')
+		if len(splitedLine)==4:
+			if splitedLine[0] in transactionInependent:	
+				sql='UPDATE log_test SET '+splitedLine[2]+ '='+splitedLine[3]+' WHERE id ='+splitedLine[1]
+				execQuery(connect, sql)
