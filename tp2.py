@@ -54,3 +54,15 @@ for line in bd_inicial:
     splitedLine.append('Nao inserido')
 
     bd_vetor.append(splitedLine)
+
+#excluindo a tabela se ela ja existe
+sql='DROP TABLE IF EXISTS log_table'
+execQuery(connect, sql)
+
+column=[]
+sqlColumns=''
+
+for item in range(0,len(bd_vetor),1):
+    if bd_vetor[item][0][0] not in column:
+        sqlColumns=sqlColumns+','+bd_vetor[item][0][0]+' INT'
+        column.appen(bd_vetor[item][0][0])
