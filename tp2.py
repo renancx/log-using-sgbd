@@ -74,3 +74,15 @@ execQuery(connect,sql)
 zerosNum=''
 for i in range(0,len(column),1):
 	zerosNum = zerosNum+',0'
+
+for item in range(0,len(bd_vetor),1):
+    if bd_vetor[item][2]=='Nao inserido':
+        sql = 'INSERT INTO log_table VALUES ('+bd_vetor[item][0][1]+zerosNum+')'
+        execQuery(connect, sql)
+        for itemTemp in range(0,len(bd_vetor),1):
+            if bd_vetor[itemTemp][0][1]==bd_vetor[item][0][1]:
+                bd_vetor[itemTemp][2]='Inserido'
+
+for item in range(0,len(bd_vetor),1):
+    sql='UPDATE log_table SET id = '+bd_vetor[item][0][1]+', '+bd_vetor[item][0][0]+' = '+bd_vetor[item][1]+' WHERE id ='+bd_vetor[item][0][1]
+    execQuery(connect, sql)
