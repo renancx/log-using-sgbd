@@ -1,19 +1,27 @@
-A,1=100
+A,1=20
 A,2=20  
-B,1=20
+B,1=55
 B,2=30
 
-
 <start T1>
-<T1,1, A,30>
+<T1,1,A,20>
 <start T2>
-<commit T1>
-<Start Checkpoint (T2)>
-<T2,2, A,50>
-<End Checkpoint>
+<T2,1,B,55>
+<commit T2>
 <start T3>
-<Start Checkpoint (T2, T3)>
+<T3,2,B,15>
+<commit T1>
 <start T4>
-<T4,1, A,100>
-<End Checkpoint>
+<T4,1,A,90>
+<start T5>
+<Start CKPT(T3,T4,T5)>
 <commit T4>
+<T5,1,A,40>
+<End CKPT>
+<T3,2,B,28>
+<commit T3>
+<commit T5>
+<start T6>
+<T6,1,A,2000>
+<commit T6>
+<crash>
