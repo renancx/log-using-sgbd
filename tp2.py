@@ -86,3 +86,20 @@ for item in range(0,len(bd_vetor),1):
 for item in range(0,len(bd_vetor),1):
     sql='UPDATE log_table SET id = '+bd_vetor[item][0][1]+', '+bd_vetor[item][0][0]+' = '+bd_vetor[item][1]+' WHERE id ='+bd_vetor[item][0][1]
     execQuery(connect, sql)
+
+#checkpoints
+commitedTransactions={}
+checkpointStart= 0 #linha inicial do checkpoint
+
+checkpointFuncional = False #nao teve checkpoint funcional
+for line in range(len(log)-1,-1,-1):
+	if 'CKPT' in log[line] and 'Start' in log[line]:
+		checkpointStart=line
+		for lineEndCkpt in range(len(log)-1,-1,-1):
+			if 'End' in log[lineEndCkpt] and lineEndCkpt>line:
+				checkpointFuncional=True #teve checkpoint funcional
+				for lineCkpt in range(line,len(log)-1,1):
+					if 'commit' in log[lineCkpt]:
+						splitedCommit=log[lineCkpt].split(' ')
+						commitedTransactions[splitedCommit[1][:-1]]='Nao visitado'
+				break
